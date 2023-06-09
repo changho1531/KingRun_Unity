@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using UnityEngine;
 
 public class MobileCharacterController : MonoBehaviour
 {
+    //스와이프 동작 :  사용자가 터치 입력을 사용하여 화면을 빠르게 스와이프하는 동작을 말합니다
+    //일반적으로 사용자가 손가락을 화면 위에서 아래로, 왼쪽에서 오른쪽으로, 오른쪽에서 왼쪽으로 등으로 빠르게 움직이는 동작을 스와이프 동작이라고 한단.
+
     private Vector2 touchStartPosition; // 터치 시작 지점
 
     private Rigidbody rigidbody; // Rigidbody 컴포넌트를 참조하기 위한 변수
@@ -23,14 +25,20 @@ public class MobileCharacterController : MonoBehaviour
 
     private void Update()
     {
+        
         if (Input.touchCount > 0)
         {
+            //Input.GetTouch(0) : 첫 번째 터치에 대한 정보를 가져오는 메서드
             Touch touch = Input.GetTouch(0);
 
+            //touch.phase : 터치의 상태를 나타낸다, 이 속성을 통해 현재 상태를 확인
+            //TouchPhase.Began: 터치가 시작된 순간
             if (touch.phase == TouchPhase.Began)
             {
+                // 터치 시작 지점을 저장합니다
                 touchStartPosition = touch.position;
             }
+            //TouchPhase.Ended: 터치가 종료된 순간
             else if (touch.phase == TouchPhase.Ended)
             {
                 Vector2 swipeDirection = touch.position - touchStartPosition;
